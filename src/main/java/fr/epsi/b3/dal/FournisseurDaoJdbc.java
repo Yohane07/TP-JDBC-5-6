@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
 
-public class FournisseurJDBCDAO implements FournisseurDAO{
+public class FournisseurDaoJdbc implements FournisseurDAO{
     private static final String INSERT_QUERY = "INSERT INTO fournisseur(NOM) VALUES(?)";
     private static final String SELECT_QUERY = "SELECT * FROM fournisseur";
     private static final String UPDATE_QUERY = "UPDATE fournisseur SET NOM=? WHERE ID=?";

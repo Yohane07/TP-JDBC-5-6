@@ -8,15 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ArticleJDBCDAO implements ArticleDAO {
+public class ArticleDaoJdbc implements ArticleDAO {
     private static final String INSERT_QUERY = "INSERT INTO article(NOM, PRIX, ID_FOURNISSEUR) VALUES(?, ?, ?)";
     private static final String SELECT_QUERY = "SELECT a.*, f.ID as ID_FOURNISSEUR, f.NOM as NAME_FOURNISSEUR FROM article a LEFT JOIN fournisseur f ON f.ID = a.ID_FOURNISSEUR";
     private static final String UPDATE_QUERY = "UPDATE article SET NOM=?, PRIX=?, ID_FOURNISSEUR=? WHERE ID=?";
     private static final String DELETE_ID_QUERY = "DELETE FROM article WHERE ID=?";
-
+    private static final String GET_PRICE_AVERAGE = "SELECT AVG(PRIX) as MOYENNE FROM article";
     private static final String DB_URL;
     private static final String DB_USER;
     private static final String DB_PWD;
+
 
     static {
         ResourceBundle bundle = ResourceBundle.getBundle( "db" );
@@ -55,8 +56,6 @@ public class ArticleJDBCDAO implements ArticleDAO {
                 Articles.add( article );
             }
         }
-
-
         return Articles;
     }
 
@@ -79,6 +78,18 @@ public class ArticleJDBCDAO implements ArticleDAO {
             preparedStatement.setString(1, String.valueOf(articleId));
             preparedStatement.executeUpdate();
         }
+    }
+
+    public Double getMoyenne() throws SQLException {
+        double res = 0;
+        try ( Connection connection = DriverManager.getConnection( DB_URL, DB_USER, DB_PWD );
+              PreparedStatement preparedStatement = connection.prepareStatement(GET_PRICE_AVERAGE)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+                res = resultSet.getDouble("MOYENNE");
+            }
+        }
+        return res;
     }
 
 }
