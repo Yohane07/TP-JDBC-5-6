@@ -21,6 +21,26 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.gateside</groupId>
+            <artifactId>GAT</artifactId>
+            <version>2.1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.young-flash</groupId>
+            <artifactId>flash-GAT</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>int.esa.ccsds.mo</groupId>
+            <artifactId>TRANSPORT_GEN</artifactId>
+            <version>8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>int.esa.ccsds.mo</groupId>
+            <artifactId>ENCODING_GEN</artifactId>
+            <version>8.0</version>
+        </dependency>
     </dependencies>
 
 </project>
